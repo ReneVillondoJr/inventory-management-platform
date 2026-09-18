@@ -20,7 +20,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
+} from '@/components/shared/select';
 import { Label } from '@/components/ui/label';
 import { adminNavigation } from '@/data/navigation/admin-navigation';
 import { type RoleName } from '@/lib/auth/permissions';

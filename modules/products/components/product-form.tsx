@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 
 import { CheckCircle2 } from 'lucide-react';
 
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/shared/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -15,7 +15,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
+} from '@/components/shared/select';
 import { seedData } from '@/data/seed/inventory-seed';
 
 import { productSchema } from '../schemas/product-schema';
@@ -137,7 +137,11 @@ export function ProductForm({ product }: ProductFormProps) {
 
               <Select
                 value={values.categoryId}
-                onValueChange={(value) => update('categoryId', value)}
+                onValueChange={(value) => {
+                  if (value !== null) {
+                    update('categoryId', value);
+                  }
+                }}
               >
                 <SelectTrigger
                   id='product-category'
@@ -163,7 +167,11 @@ export function ProductForm({ product }: ProductFormProps) {
 
               <Select
                 value={values.brandId}
-                onValueChange={(value) => update('brandId', value)}
+                onValueChange={(value) => {
+                  if (value !== null) {
+                    update('brandId', value);
+                  }
+                }}
               >
                 <SelectTrigger
                   id='product-brand'

@@ -4,7 +4,7 @@ import { useMemo, useState } from 'react';
 
 import { ArrowRight, CheckCircle2 } from 'lucide-react';
 
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/shared/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import {
@@ -13,7 +13,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
+} from '@/components/shared/select';
 
 import { stockTransferSchema } from '../schemas/stock-transfer-schema';
 import { inventoryService } from '../services/inventory-service';

@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 import { PackagePlus, Boxes, CircleCheck, CircleX } from 'lucide-react';
 
-import { Button } from '@/components/buttons';
+import { Button } from '@/components/shared/button';
 
 import { useProducts } from '../hooks/use-products';
 
