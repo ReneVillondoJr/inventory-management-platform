@@ -220,19 +220,16 @@ export function WarehouseList() {
             <SelectItem value='INACTIVE'>Inactive</SelectItem>
           </SelectContent>
         </Select>
-
-        <div />
       </FilterBar>
 
       {/* Register */}
-      <div>
-        <h2 className='text-sm font-semibold'>Warehouse register</h2>
 
-        <p className='mt-0.5 text-xs text-muted-foreground'>
-          {warehouses.length}{' '}
-          {warehouses.length === 1 ? 'warehouse' : 'warehouses'} shown
-        </p>
-      </div>
+      <h2 className='text-sm font-semibold'>Warehouse register</h2>
+
+      <p className='mt-0.5 text-xs text-muted-foreground'>
+        {warehouses.length}{' '}
+        {warehouses.length === 1 ? 'warehouse' : 'warehouses'} shown
+      </p>
 
       <WarehouseTable
         warehouses={warehouses}

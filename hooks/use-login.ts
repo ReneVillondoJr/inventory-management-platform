@@ -3,6 +3,8 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
+import { authenticateTestUser } from '@/data/seed/test-auth';
+import { startTestSession } from '@/lib/rbac';
 import type { LoginFormValues } from '@/types/auth';
 
 export function useLogin() {
@@ -15,10 +17,15 @@ export function useLogin() {
     setIsSubmitting(true);
 
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1200));
+      const user = authenticateTestUser(values.email, values.password);
 
-      void values;
-      router.push('/admin/dashboard');
+      if (!user) {
+        setError('Use an active seeded email and the temporary test password.');
+        return;
+      }
+
+      startTestSession(user.role);
+      router.replace('/admin/dashboard');
     } catch {
       setError('Unable to sign in. Please check your credentials.');
     } finally {

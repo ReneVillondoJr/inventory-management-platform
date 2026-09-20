@@ -8,6 +8,7 @@ import {
   DEFAULT_ROLE,
   getModuleForPathname,
   getStoredRole,
+  hasTestSession,
 } from '@/lib/rbac';
 import type { RoleName } from '@/lib/auth/permissions';
 
@@ -15,9 +16,15 @@ export function RoleGuard({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
   const [role, setRole] = useState<RoleName>(DEFAULT_ROLE);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
-    const syncRole = () => setRole(getStoredRole());
+    const syncRole = () => {
+      setRole(getStoredRole());
+      setIsAuthenticated(hasTestSession());
+      setIsReady(true);
+    };
 
     syncRole();
     window.addEventListener('inventory-role-change', syncRole);
@@ -30,10 +37,23 @@ export function RoleGuard({ children }: { children: React.ReactNode }) {
   }, []);
 
   useEffect(() => {
+    if (!isReady) {
+      return;
+    }
+
+    if (!isAuthenticated) {
+      router.replace('/login');
+      return;
+    }
+
     if (!canAccessModule(role, getModuleForPathname(pathname))) {
       router.replace('/admin/dashboard');
     }
-  }, [pathname, role, router]);
+  }, [isAuthenticated, isReady, pathname, role, router]);
+
+  if (!isReady || !isAuthenticated) {
+    return null;
+  }
 
   return children;
 }

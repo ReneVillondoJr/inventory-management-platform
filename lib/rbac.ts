@@ -6,6 +6,7 @@ import {
 } from '@/lib/auth/permissions';
 
 export const DEFAULT_ROLE: RoleName = 'SUPER_ADMIN';
+const TEST_SESSION_KEY = 'inventory-test-session';
 
 export function getStoredRole(): RoleName {
   if (typeof window === 'undefined') {
@@ -27,6 +28,32 @@ export function setStoredRole(role: RoleName) {
   }
 
   window.localStorage.setItem('inventory-role', role);
+  window.dispatchEvent(new Event('inventory-role-change'));
+}
+
+export function hasTestSession() {
+  return (
+    typeof window !== 'undefined' &&
+    window.localStorage.getItem(TEST_SESSION_KEY) === 'active'
+  );
+}
+
+export function startTestSession(role: RoleName) {
+  if (typeof window === 'undefined') {
+    return;
+  }
+
+  window.localStorage.setItem(TEST_SESSION_KEY, 'active');
+  setStoredRole(role);
+}
+
+export function clearTestSession() {
+  if (typeof window === 'undefined') {
+    return;
+  }
+
+  window.localStorage.removeItem(TEST_SESSION_KEY);
+  window.localStorage.removeItem('inventory-role');
   window.dispatchEvent(new Event('inventory-role-change'));
 }
 

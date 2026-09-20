@@ -5,6 +5,10 @@ import { useEffect, useState } from 'react';
 import { LoginBrand } from './login-brand';
 import { LoginForm } from './login-form';
 import { LoginStatus } from './login-status';
+import {
+  TEMPORARY_TEST_EMAIL,
+  TEMPORARY_TEST_PASSWORD,
+} from '@/data/seed/test-auth';
 
 export function LoginView() {
   const [mounted, setMounted] = useState(false);
@@ -45,6 +49,13 @@ export function LoginView() {
         <div className='px-7 py-8 sm:px-9'>
           <LoginBrand />
           <LoginForm />
+
+          <p className='font-mono-ui mt-4 rounded-md border border-[#262b2f] bg-[#101315] px-3 py-2 text-[10px] leading-5 text-[#a7abaf]'>
+            Temporary test login: any active seeded user email with password
+            <span className='ml-1 text-[#e2a23c]'>{TEMPORARY_TEST_EMAIL}</span>
+            <span className='mx-1 text-[#5f666b]'>/</span>
+            <span className='text-[#e2a23c]'>{TEMPORARY_TEST_PASSWORD}</span>
+          </p>
 
           <p className='font-sans-ui mt-6 text-center text-[12px] text-[#868c91]'>
             Need access? Contact your system administrator.

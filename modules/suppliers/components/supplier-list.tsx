@@ -191,7 +191,7 @@ export function SupplierList() {
         <Select
           value={status}
           onValueChange={(value) => {
-            if (value) {
+            if (value !== null) {
               setStatus(value as 'ALL' | SupplierStatus);
             }
           }}
@@ -202,25 +202,20 @@ export function SupplierList() {
 
           <SelectContent>
             <SelectItem value='ALL'>All statuses</SelectItem>
-
             <SelectItem value='ACTIVE'>Active</SelectItem>
-
             <SelectItem value='INACTIVE'>Inactive</SelectItem>
           </SelectContent>
         </Select>
-
-        <div />
       </FilterBar>
 
       {/* Register */}
-      <div>
-        <h2 className='text-sm font-semibold'>Supplier register</h2>
 
-        <p className='mt-0.5 text-xs text-muted-foreground'>
-          {suppliers.length} {suppliers.length === 1 ? 'supplier' : 'suppliers'}{' '}
-          shown
-        </p>
-      </div>
+      <h2 className='text-sm font-semibold'>Supplier register</h2>
+
+      <p className='mt-0.5 text-xs text-muted-foreground'>
+        {suppliers.length} {suppliers.length === 1 ? 'supplier' : 'suppliers'}{' '}
+        shown
+      </p>
 
       <SupplierTable
         suppliers={suppliers}

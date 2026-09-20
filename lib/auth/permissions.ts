@@ -108,3 +108,8 @@ export const rolePermissions: Record<
     stockTransfers: 'none',
   },
 };
+
+export function canEditModule(role: RoleName, moduleName: ModuleKey) {
+  const access = rolePermissions[role]?.[moduleName] ?? 'none';
+  return access === 'full' || access === 'limited';
+}

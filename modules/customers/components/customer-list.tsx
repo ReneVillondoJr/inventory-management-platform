@@ -200,14 +200,10 @@ export function CustomerList() {
 
           <SelectContent>
             <SelectItem value='ALL'>All statuses</SelectItem>
-
             <SelectItem value='ACTIVE'>Active</SelectItem>
-
             <SelectItem value='INACTIVE'>Inactive</SelectItem>
           </SelectContent>
         </Select>
-
-        <div />
       </FilterBar>
 
       {/* Register */}
@@ -215,7 +211,7 @@ export function CustomerList() {
         <h2 className='text-sm font-semibold'>Customer register</h2>
 
         <p className='mt-0.5 text-xs text-muted-foreground'>
-          {customers.length} {customers.length === 1 ? 'customer' : 'customers'}{' '}
+          {customers.length} {customers.length === 1 ? 'customer' : 'customers'}
           shown
         </p>
       </div>

@@ -5,6 +5,7 @@ import type { ReactNode } from 'react';
 import { RotateCcw } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
+
 import { Card, CardContent } from '@/components/ui/card';
 
 type FilterBarProps = {
@@ -27,7 +28,7 @@ export function FilterBar({
   return (
     <Card className={className}>
       <CardContent className='p-4'>
-        <div className={`grid gap-3 ${gridClassName}`}>
+        <div className={`grid items-center gap-3 ${gridClassName}`}>
           {children}
 
           {hasFilters && onReset ?
@@ -36,12 +37,12 @@ export function FilterBar({
               variant='ghost'
               size='sm'
               onClick={onReset}
-              className='h-9 px-2.5'
+              className='h-9 w-fit justify-self-start px-2.5'
             >
               <RotateCcw className='size-4' />
               {resetLabel}
             </Button>
-          : <div />}
+          : null}
         </div>
       </CardContent>
     </Card>
