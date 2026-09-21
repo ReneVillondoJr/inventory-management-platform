@@ -104,6 +104,10 @@ export function StockTransferForm({ onSuccess }: StockTransferFormProps) {
     }
   };
 
+  function setFromWarehouse(arg0: string): void {
+    throw new Error('Function not implemented.');
+  }
+
   return (
     <Card className='border-border/60 shadow-none'>
       <CardHeader>
@@ -117,7 +121,10 @@ export function StockTransferForm({ onSuccess }: StockTransferFormProps) {
               Product
             </Label>
 
-            <Select value={productId} onValueChange={setProductId}>
+            <Select
+              value={productId}
+              onValueChange={(value) => setProductId(value ?? '')}
+            >
               <SelectTrigger
                 id='transfer-product'
                 className='mt-1.5 h-10 w-full'
@@ -143,7 +150,7 @@ export function StockTransferForm({ onSuccess }: StockTransferFormProps) {
 
               <Select
                 value={sourceWarehouseId}
-                onValueChange={setSourceWarehouseId}
+                onValueChange={(value) => setSourceWarehouseId(value ?? '')}
               >
                 <SelectTrigger
                   id='source-warehouse'
@@ -174,7 +181,9 @@ export function StockTransferForm({ onSuccess }: StockTransferFormProps) {
 
               <Select
                 value={destinationWarehouseId}
-                onValueChange={setDestinationWarehouseId}
+                onValueChange={(value) =>
+                  setDestinationWarehouseId(value ?? '')
+                }
               >
                 <SelectTrigger
                   id='destination-warehouse'

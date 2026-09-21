@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { NotificationBell } from '@/modules/notifications/components/notification-bell';
 import { useRouter } from 'next/navigation';
 
 import {
@@ -9,13 +10,15 @@ import {
   CircleHelp,
   LogOut,
   Search,
-  Settings,
+  Settings2,
+  ShieldCheck,
   UserRound,
 } from 'lucide-react';
 
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -25,7 +28,9 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+
 import { clearTestSession } from '@/lib/rbac';
+import { HelpMenu } from '@/modules/help';
 
 export function AdminHeader() {
   const router = useRouter();
@@ -43,6 +48,7 @@ export function AdminHeader() {
           <p className='truncate text-sm font-semibold tracking-tight text-foreground'>
             Inventory Operations
           </p>
+
           <p className='truncate text-[11px] text-muted-foreground'>
             Management workspace
           </p>
@@ -50,6 +56,7 @@ export function AdminHeader() {
 
         <div className='relative hidden max-w-md flex-1 md:block'>
           <Search className='pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground' />
+
           <Input
             placeholder='Search products, orders, customers...'
             className='h-9 border-border/60 bg-muted/40 pl-9 shadow-none focus-visible:ring-1'
@@ -67,24 +74,9 @@ export function AdminHeader() {
           <Search className='size-4' />
         </Button>
 
-        <Button
-          variant='ghost'
-          size='icon-sm'
-          aria-label='Help and support'
-          className='text-muted-foreground hover:bg-muted hover:text-foreground'
-        >
-          <CircleHelp className='size-4' />
-        </Button>
+        <HelpMenu />
 
-        <Button
-          variant='ghost'
-          size='icon-sm'
-          aria-label='Notifications'
-          className='relative text-muted-foreground hover:bg-muted hover:text-foreground'
-        >
-          <Bell className='size-4' />
-          <span className='absolute right-1.5 top-1.5 size-1.5 rounded-full bg-destructive' />
-        </Button>
+        <NotificationBell />
 
         <div className='ml-2 h-6 w-px bg-border' />
 
@@ -100,6 +92,7 @@ export function AdminHeader() {
               <p className='truncate text-xs font-semibold text-foreground'>
                 Admin
               </p>
+
               <p className='truncate text-[11px] text-muted-foreground'>
                 Administrator
               </p>
@@ -126,9 +119,11 @@ export function AdminHeader() {
                     <p className='truncate text-sm font-semibold text-foreground'>
                       Admin
                     </p>
+
                     <p className='truncate text-xs text-muted-foreground'>
                       Administrator
                     </p>
+
                     <p className='mt-0.5 truncate text-[10px] text-muted-foreground/80'>
                       admin@example.com
                     </p>
@@ -152,21 +147,31 @@ export function AdminHeader() {
 
               <DropdownMenuItem className='rounded-lg px-2.5 py-2 focus:bg-muted'>
                 <Link
-                  href='/admin/settings'
+                  href='/admin/settings/notifications'
                   className='flex w-full items-center gap-2.5'
                 >
-                  <Settings className='size-4 text-muted-foreground' />
-                  <span>Settings</span>
+                  <Bell className='size-4 text-muted-foreground' />
+                  <span>Notifications</span>
                 </Link>
               </DropdownMenuItem>
 
               <DropdownMenuItem className='rounded-lg px-2.5 py-2 focus:bg-muted'>
                 <Link
-                  href='/admin/notifications'
+                  href='/admin/settings/security'
                   className='flex w-full items-center gap-2.5'
                 >
-                  <Bell className='size-4 text-muted-foreground' />
-                  <span>Notifications</span>
+                  <ShieldCheck className='size-4 text-muted-foreground' />
+                  <span>Security</span>
+                </Link>
+              </DropdownMenuItem>
+
+              <DropdownMenuItem className='rounded-lg px-2.5 py-2 focus:bg-muted'>
+                <Link
+                  href='/admin/settings/system'
+                  className='flex w-full items-center gap-2.5'
+                >
+                  <Settings2 className='size-4 text-muted-foreground' />
+                  <span>System</span>
                 </Link>
               </DropdownMenuItem>
             </DropdownMenuGroup>

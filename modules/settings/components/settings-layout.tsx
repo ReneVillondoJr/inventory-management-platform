@@ -1,30 +1,19 @@
 'use client';
 
-import { Bell, Monitor, Settings2, Shield, UserRound } from 'lucide-react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import type { ReactNode } from 'react';
 
-import { cn } from '@/lib/utils';
-
-import { settingsSections, type SettingsSection } from '../types/settings';
-
-const sectionIcons: Record<SettingsSection, typeof Settings2> = {
-  general: Settings2,
-  profile: UserRound,
-  notifications: Bell,
-  security: Shield,
-  system: Monitor,
-};
+import type { SettingsNavigationItem } from '@/modules/settings/components/settings-navigation';
 
 type SettingsLayoutProps = {
-  activeSection: SettingsSection;
-  onSectionChange: (section: SettingsSection) => void;
-  children: React.ReactNode;
+  navigation: SettingsNavigationItem[];
+  children: ReactNode;
 };
 
-export function SettingsLayout({
-  activeSection,
-  onSectionChange,
-  children,
-}: SettingsLayoutProps) {
+export function SettingsLayout({ navigation, children }: SettingsLayoutProps) {
+  const pathname = usePathname();
+
   return (
     <div className='grid gap-6 lg:grid-cols-[230px_minmax(0,1fr)]'>
       <aside className='h-fit'>
@@ -37,39 +26,34 @@ export function SettingsLayout({
         </div>
 
         <nav aria-label='Settings navigation' className='space-y-1'>
-          {settingsSections.map((section) => {
-            const Icon = sectionIcons[section.id];
-            const active = activeSection === section.id;
+          {navigation.map((item) => {
+            const Icon = item.icon;
+            const active = pathname === item.href;
 
             return (
-              <button
-                key={section.id}
-                type='button'
-                onClick={() => onSectionChange(section.id)}
-                className={cn(
-                  'flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-left transition-colors',
+              <Link
+                key={item.href}
+                href={item.href}
+                className={[
+                  'flex items-center gap-3 rounded-lg px-3 py-2.5 text-left transition-colors',
                   active ?
                     'bg-muted text-foreground'
                   : 'text-muted-foreground hover:bg-muted/60 hover:text-foreground',
-                )}
+                ].join(' ')}
               >
                 <Icon className='size-4 shrink-0' />
 
                 <span className='min-w-0'>
                   <span
-                    className={cn(
+                    className={[
                       'block text-sm font-medium',
-                      active && 'text-foreground',
-                    )}
+                      active ? 'text-foreground' : '',
+                    ].join(' ')}
                   >
-                    {section.label}
-                  </span>
-
-                  <span className='mt-0.5 block truncate text-[11px] text-muted-foreground'>
-                    {section.description}
+                    {item.title}
                   </span>
                 </span>
-              </button>
+              </Link>
             );
           })}
         </nav>

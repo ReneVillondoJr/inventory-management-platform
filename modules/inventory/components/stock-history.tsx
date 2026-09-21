@@ -115,7 +115,7 @@ export function StockHistory() {
         <Select
           value={filters.warehouseId}
           onValueChange={(value) =>
-            setFilters((current) => ({ ...current, warehouseId: value }))
+            setFilters((current) => ({ ...current, warehouseId: value ?? '' }))
           }
         >
           <SelectTrigger className='h-10 w-full'>
@@ -135,7 +135,7 @@ export function StockHistory() {
         <Select
           value={filters.productId}
           onValueChange={(value) =>
-            setFilters((current) => ({ ...current, productId: value }))
+            setFilters((current) => ({ ...current, productId: value ?? '' }))
           }
         >
           <SelectTrigger className='h-10 w-full'>

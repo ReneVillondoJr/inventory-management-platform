@@ -1,6 +1,5 @@
-﻿export {};
-import { SettingsPage } from '@/modules/settings';
+﻿import { redirect } from 'next/navigation';
 
-export default function SettingsRoute() {
-  return <SettingsPage />;
+export default function SettingsPage() {
+  redirect('/admin/settings/profile');
 }

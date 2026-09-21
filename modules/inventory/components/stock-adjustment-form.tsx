@@ -115,7 +115,10 @@ export function StockAdjustmentForm({ onSuccess }: StockAdjustmentFormProps) {
                 Product
               </Label>
 
-              <Select value={productId} onValueChange={setProductId}>
+              <Select
+                value={productId}
+                onValueChange={(value) => setProductId(value ?? '')}
+              >
                 <SelectTrigger
                   id='adjustment-product'
                   className='mt-1.5 h-10 w-full'
@@ -141,7 +144,10 @@ export function StockAdjustmentForm({ onSuccess }: StockAdjustmentFormProps) {
                 Warehouse
               </Label>
 
-              <Select value={warehouseId} onValueChange={setWarehouseId}>
+              <Select
+                value={warehouseId}
+                onValueChange={(value) => setWarehouseId(value ?? '')}
+              >
                 <SelectTrigger
                   id='adjustment-warehouse'
                   className='mt-1.5 h-10 w-full'
